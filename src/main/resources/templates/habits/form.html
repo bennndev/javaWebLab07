@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${habit.id == null ? 'Nuevo Hábito' : 'Editar Hábito'}"></title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container">
+    <h2 th:text="${habit.id == null ? 'Nuevo Hábito' : 'Editar Hábito'}"></h2>
+
+    <form th:action="@{${habit.id == null ? '/dashboard/habits' : '/dashboard/habits/update/' + habit.id}}"
+          th:object="${habit}" method="post">
+
+        <div>
+            <label>Nombre:</label>
+            <input type="text" th:field="*{name}" required>
+        </div>
+
+        <div>
+            <label>Descripción:</label>
+            <textarea th:field="*{description}" style="width:100%; padding:0.6rem; border-radius:6px; border:1px solid #ccc;"></textarea>
+        </div>
+
+        <div>
+            <label>Estado:</label>
+            <select th:field="*{status}" style="width:100%; padding:0.6rem; border-radius:6px;">
+                <option value="ACTIVE">Activo</option>
+                <option value="COMPLETED">Completado</option>
+                <option value="DROPPED">Abandonado</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Frecuencia por semana:</label>
+            <input type="number" th:field="*{frequencyPerWeek}" min="1">
+        </div>
+
+        <div>
+            <label>Fecha inicio:</label>
+            <input type="date" th:field="*{startDate}">
+        </div>
+
+        <div>
+            <label>Fecha fin:</label>
+            <input type="date" th:field="*{endDate}">
+        </div>
+
+        <button type="submit">Guardar</button>
+    </form>
+
+    <br>
+    <a th:href="@{/dashboard/habits}">
+        <button type="button">Volver</button>
+    </a>
+</div>
+</body>
+</html>

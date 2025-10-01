@@ -1,65 +1,129 @@
 /* === Paleta de colores === */
 :root {
     --primary: #6DB33F;         /* Verde actual */
+    --primary-hover: #5AA12F;   /* Verde más oscuro para hover */
+    --danger: #d9534f;          /* Rojo para eliminar */
+    --danger-hover: #c9302c;    /* Rojo oscuro para hover */
     --bg: #FFFFFF;              /* Fondo general blanco */
     --card: #F7F7F7;            /* Contenedor ligeramente más oscuro */
     --on-primary: #FFFFFF;      /* Texto sobre botones verdes */
+    --text-dark: #333;          /* Texto oscuro para contenido */
+    --border: #ddd;             /* Bordes sutiles */
+    --input-bg: #FFFFFF;        /* Fondo de inputs */
+    --error-text: #d9534f;      /* Texto de error */
+    --success-text: #5cb85c;    /* Texto de éxito */
 }
 
 /* === Reset básico === */
-body {
-    font-family: Arial, sans-serif;
-    background-color: var(--bg);
-    color: var(--primary); /* Texto en verde según requerimiento */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: var(--text-dark);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    padding: 2rem;
 }
 
 /* === Contenedor principal === */
 .container {
     background-color: var(--card);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
-    width: 350px;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0px 4px 16px rgba(0,0,0,0.12);
+    width: 100%;
+    max-width: 1200px;
     text-align: center;
 }
 
 /* === Títulos === */
 h2 {
     color: var(--primary);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* === Espaciado entre elementos === */
+br {
+    display: block;
+    margin: 0.5rem 0;
+}
+
+/* === Enlaces (para que no afecten el estilo de botones) === */
+a {
+    text-decoration: none;
+    display: inline-block;
 }
 
 /* === Formularios === */
-form div {
-    margin-bottom: 1rem;
+form {
     text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
+form > div {
+    margin-bottom: 1.2rem;
+}
+
+/* === Labels === */
 label {
     display: block;
-    font-weight: bold;
-    margin-bottom: 0.3rem;
-    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+    font-size: 0.95rem;
 }
 
-input {
+/* === Inputs, Textareas y Selects === */
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
     width: 100%;
-    padding: 0.6rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
+    padding: 0.75rem;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    background-color: var(--input-bg);
+    transition: all 0.3s ease;
     outline: none;
-    color: var(--primary);
+    font-family: inherit;
 }
 
-input:focus {
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 4px var(--primary);
+    box-shadow: 0 0 0 3px rgba(109, 179, 63, 0.1);
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    padding-right: 2.5rem;
 }
 
 /* === Botones === */
@@ -67,20 +131,253 @@ button {
     background-color: var(--primary);
     color: var(--on-primary);
     border: none;
-    padding: 0.7rem 1.2rem;
-    border-radius: 6px;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-    transition: background-color 0.3s;
-    width: 100%;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    width: auto;
+    min-width: 180px;
+    box-shadow: 0 2px 6px rgba(109, 179, 63, 0.3);
+    font-family: inherit;
 }
 
 button:hover {
-    background-color: #5AA12F;
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(109, 179, 63, 0.4);
 }
 
-/* === Mensajes === */
+button:active {
+    transform: translateY(0);
+}
+
+button[type="submit"] {
+    margin-top: 0.5rem;
+}
+
+/* === Botones en formularios centrados === */
+form button[type="submit"] {
+    width: 100%;
+}
+
+/* === Mensajes de error y logout === */
 p {
+    margin: 1rem 0;
+    padding: 0.75rem;
+    border-radius: 6px;
     font-size: 0.9rem;
-    color: var(--primary);
+}
+
+div[th\:if] p {
+    background-color: #f8d7da;
+    color: var(--error-text);
+    border: 1px solid #f5c6cb;
+}
+
+/* Mensaje de logout exitoso */
+div p:contains("logged out") {
+    background-color: #d4edda;
+    color: var(--success-text);
+    border: 1px solid #c3e6cb;
+}
+
+/* === Tablas === */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    background-color: var(--bg);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+}
+
+thead {
+    background-color: var(--primary);
+    color: var(--on-primary);
+}
+
+th {
+    padding: 1rem 0.8rem;
+    font-size: 0.95rem;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+td {
+    padding: 1rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    text-align: left;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+    background-color: #eef9e8;
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* === Botones dentro de tabla === */
+td button {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    margin: 0.2rem;
+    min-width: 80px;
+}
+
+/* Botón Editar */
+td a:first-child button {
+    background-color: var(--primary);
+}
+
+td a:first-child button:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Botón Eliminar - estilo de advertencia */
+td a:last-child button {
+    background-color: var(--danger);
+    box-shadow: 0 2px 6px rgba(217, 83, 79, 0.3);
+}
+
+td a:last-child button:hover {
+    background-color: var(--danger-hover);
+    box-shadow: 0 4px 10px rgba(217, 83, 79, 0.4);
+}
+
+/* === Columna de Acciones === */
+td:last-child {
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* === Grupos de botones (múltiples botones uno al lado del otro) === */
+.button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Para forms con múltiples botones */
+form + br + form,
+form + form {
+    margin-top: 1rem;
+}
+
+/* === Estilos específicos para vista de Login === */
+body:has(h2:contains("Login")) .container {
+    max-width: 450px;
+}
+
+/* === Estilos específicos para vista de Home === */
+body:has(h2:contains("Welcome")) .container {
+    max-width: 500px;
+}
+
+body:has(h2:contains("Welcome")) form {
+    max-width: 100%;
+}
+
+body:has(h2:contains("Welcome")) button {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+/* === Estilos específicos para formulario de Hábito === */
+body:has(h2:contains("Hábito")) .container form {
+    max-width: 600px;
+}
+
+/* === Responsividad === */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+    }
+
+    .container {
+        padding: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+
+    th, td {
+        padding: 0.6rem 0.5rem;
+    }
+
+    button {
+        min-width: 140px;
+        padding: 0.7rem 1rem;
+    }
+
+    td button {
+        min-width: 70px;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+
+    form {
+        max-width: 100%;
+    }
+}
+
+/* === Tabla desbordante en móviles === */
+@media (max-width: 600px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    button {
+        min-width: 120px;
+        font-size: 0.9rem;
+    }
+}
+
+/* === Animaciones === */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* === Estados de carga === */
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+button:disabled:hover {
+    background-color: #ccc;
+    transform: none;
+    box-shadow: none;
 }

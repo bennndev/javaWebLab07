@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Hábitos</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container">
+    <h2>Mis Hábitos</h2>
+
+    <a th:href="@{/dashboard/habits/new}">
+        <button type="button">Registrar Hábito</button>
+    </a>
+
+    <br><br>
+
+    <table border="1" style="width:100%; border-collapse: collapse; text-align:left;">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Frecuencia</th>
+            <th>Inicio</th>
+            <th>Fin</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="h : ${habits}">
+            <td th:text="${h.name}"></td>
+            <td th:text="${h.description}"></td>
+            <td th:text="${h.status}"></td>
+            <td th:text="${h.frequencyPerWeek} + ' veces/semana'"></td>
+            <td th:text="${h.startDate}"></td>
+            <td th:text="${h.endDate}"></td>
+            <td>
+                <a th:href="@{|/dashboard/habits/edit/${h.id}|}">
+                    <button type="button">Editar</button>
+                </a>
+                <a th:href="@{|/dashboard/habits/delete/${h.id}|}">
+                    <button type="button">Eliminar</button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <a th:href="@{/home}">
+        <button type="button">Volver al Home</button>
+    </a>
+</div>
+</body>
+</html>

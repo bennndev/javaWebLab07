@@ -8,15 +8,18 @@
 <body>
 <div class="container">
     <h2>Welcome to the Home Page!</h2>
-    <a href="/dashboards">
-        <button type="button">Ver Dashboards</button>
-    </a>
+
+    <!-- Botón para ir al Dashboard de Hábitos -->
+    <form th:action="@{/dashboard/habits}" method="get">
+        <button type="submit">Ver Dashboard de Hábitos</button>
+    </form>
+
     <br>
+
+    <!-- Botón para cerrar sesión -->
     <form th:action="@{/logout}" method="post">
         <button type="submit">Logout</button>
     </form>
 </div>
 </body>
 </html>
-
-
